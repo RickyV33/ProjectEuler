@@ -4,7 +4,7 @@ def largestPrimeFactor(num = 600851475143):
     """Finds the largest prime factor of a given number.
     num defaults to 600851475143 if no argument is given."""
 
-    divisor = 2
+    divisor = 2 #Holds the divisor that num is divided by
 
     while divisor <= sqrt(num):
         if num % divisor == 0:

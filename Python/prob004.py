@@ -2,7 +2,7 @@ def largestPalindromeProduct(min = 100, max = 1000):
     """Finds the largest palindrome in the range of min and max.
     min and max defaults to 100 and 1000 respectively if no argument is passed in."""
     
-    palindrome = 0
+    palindrome = 0 #Holds the palindrome of the product between numbers
 
     for x in range(min, max):
         for y in range(min, max):
