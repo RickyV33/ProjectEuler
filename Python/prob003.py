@@ -1,7 +1,7 @@
 from math import sqrt
 
 def largestPrimeFactor(num = 600851475143):
-    """Finds the largest prime factor of a given number.
+    """Returns the largest prime factor of a given number.
     num defaults to 600851475143 if no argument is given."""
 
     divisor = 2 #Holds the divisor that num is divided by
@@ -12,8 +12,9 @@ def largestPrimeFactor(num = 600851475143):
         else:
             divisor = 3 if divisor == 2 else divisor + 2 #Only uses divisors 2,3,5,7,9,11....(n+2)
 
-    print num
+    return num
 
 
 if __name__ == '__main__':
-    largestPrimeFactor()
+    print "Largest prime factor of 13195:", largestPrimeFactor(13195)
+    print "Largest prime factor of 600,851,475,143:", largestPrimeFactor()
