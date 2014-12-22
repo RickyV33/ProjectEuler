@@ -13,5 +13,5 @@ def sumOfPrimes(limit=2000000):
     return sum(numbers)
 
 if __name__ == "__main__":
-    print "Sum of primes below 2 million: ", sumOfPrimes()
-    print "Sum of primes below 5 million: ", sumOfPrimes(5000000)
+    print "Sum of primes below 2 million:", sumOfPrimes()
+    print "Sum of primes below 5 million:", sumOfPrimes(5000000)
