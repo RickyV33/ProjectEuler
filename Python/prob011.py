@@ -1,4 +1,6 @@
 def productGrid():
+    """Returns the greatest product of any four adjacent numbers in the 20x20 block of numbers that are
+    going in the same direction(horizontal, vertical, diagonal)."""
 
     list = ["08 02 22 97 38 15 00 40 00 75 04 05 07 78 52 12 50 77 91 08",
             "49 49 99 40 17 81 18 57 60 87 17 40 98 43 69 48 04 56 62 00",
@@ -20,63 +22,69 @@ def productGrid():
             "20 69 36 41 72 30 23 88 34 62 99 69 82 67 59 85 74 04 36 16",
             "20 73 35 29 78 31 90 01 74 31 49 71 48 86 81 16 23 57 05 54",
             "01 70 54 71 83 51 54 69 16 92 33 48 61 43 52 01 89 19 67 48"]
+    product = [0, 0, 0] #Stores the the greatest diagonal, horizontal, and vertical products respectively
 
-    list = [i.split() for i in list]
-    matrix = [i for i in list]
-    matrix = [[int(i) for i in each] for each in matrix]
-
-    product = [0, 0, 0]
-    product[0] = checkDiagonal(matrix)
-    product[1] = checkHorizontal(matrix)
-    product[2] = checkVertical(matrix)
+    matrix = [i.split() for i in list] #Splits the list of strings into a list of lists
+    matrix = [[int(i) for i in each] for each in matrix] #Sets each character into an int
+    product[0] = checkDiagonal(matrix) #Get greatest diagonal product
+    product[1] = checkHorizontal(matrix) #Get greatest horizontal product
+    product[2] = checkVertical(matrix) #Get greatest vertical product
 
     return max(product)
 
 def checkDiagonal(matrix):
-    product = 0
-    temp = [1, 1]
+    """Iterates through the entire matrix and returns the greatest diagonal product of
+    four adjacent numbers."""
 
-    for i in xrange(16):
-        for j in xrange(16):
-            for k in xrange(4):
-                temp[0] *= matrix[i+k][j+k]
-                temp[1] *= matrix[i+k][j+(3-k)]
-            if product < temp[0] and temp[0] > temp[1]:
-                product = temp[0]
-            elif product < temp[1] and temp[1] > temp[0]:
-                product = temp[1]
+    product = 0 #Stores the greatest product
+    leftDiag = rightDiag = 1 #Temporary variables used to store each product
 
-            temp = [1, 1]
-
+    for i in xrange(16): #Iterates through each row
+        for j in xrange(16): #Iterates through each element of each row
+            for k in xrange(4): #Iterates through 4 adjacent numbers
+                rightDiag *= matrix[i+k][j+k] #Stores the right diagonal product
+                leftDiag *= matrix[i+k][j+(3-k)] #Stores the left diagonal product
+            if rightDiag > product and rightDiag > leftDiag:
+                product = rightDiag
+            elif leftDiag > product and leftDiag > rightDiag:
+                product = leftDiag
+            leftDiag = rightDiag = 1 #Reset temporary products
 
     return product
 
 def checkHorizontal(matrix):
-    product = 0
-    temp = 1
+    """Iterates through the entire matrix and returns the greatest horizontal product of
+    4 adjacent numbers."""
 
-    for i in xrange(20):
-        for j in xrange(16):
-            for k in xrange(4):
-                temp *= matrix[i][j+k]
-            if temp > product:
-                product = temp
-            temp = 1
+    product = 0 #Stores the greatest product
+    horiz = 1 #Stores the temporary product
+
+    for i in xrange(20): #Iterate through each row
+        for j in xrange(16): #Iterate through each element of each row
+            for k in xrange(4): #Iterate through 4 adjacent numbers 
+                horiz *= matrix[i][j+k] #Stores the horizontal product
+            if horiz > product:
+                product = horiz
+            horiz = 1 #Reset temporary product
 
     return product
             
 def checkVertical(matrix):
-    product = 0
-    temp = 1
+    """Iterates through the entire matrix and returns the greatest vertical product of
+    4 adjacent numbers."""
 
-    for i in xrange(16):
-        for j in xrange(20):
-            for k in xrange(4):
-                temp *= matrix[i+k][j]
-            if temp > product:
-                product = temp
-            temp = 1
+    product = 0 #Stores the greatst vertical product
+    vert = 1 #Stores temporary product
+
+    for i in xrange(16): #Iterate through each row
+        for j in xrange(20): #Iterate through each element of each row
+            for k in xrange(4): #Iterate through 4 adjacent numbers
+                vert *= matrix[i+k][j] #Stores the vertical product
+            if vert > product:
+                product = vert
+            vert = 1 #Reset temporary product
 
     return product
+
 if __name__ == "__main__":
     print "Largest 4 block product in 20x20 grid:", productGrid()
